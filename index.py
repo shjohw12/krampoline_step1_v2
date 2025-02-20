@@ -66,7 +66,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             
-            response = make_category_list()[category_id-1]
+            response = make_category_list()[int(category_id)-1]
             
             #response = {'category_id': category_id, 'message': 'Category details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
