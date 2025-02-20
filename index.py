@@ -1,18 +1,12 @@
 from http.server import SimpleHTTPRequestHandler, HTTPServer
-import json
 
 
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
-        self.send_header('Content-type', 'application/json; charset=utf-8')
+        self.send_header('Content-type', 'text/plain; charset=utf-8')
         self.end_headers()
-
-        data = {
-            "message": "Hello krampoline!",
-            "status": "success"
-        }
-        self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+        self.wfile.write("Hello krampoline!".encode('utf-8'))
 
 
 PORT = 3000
