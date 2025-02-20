@@ -21,10 +21,9 @@ class CustomHandler(SimpleHTTPRequestHandler):
         self.end_headers()
         
         for x in make_class_list():
-        
-            data = x
 
-            self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+
+            self.wfile.write(json.dumps(x, ensure_ascii=False).encode('utf-8'))
 
 
 PORT = 3000
