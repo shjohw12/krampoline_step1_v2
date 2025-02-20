@@ -16,6 +16,7 @@ def make_class_list():
 
     
     
+'''
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -26,6 +27,14 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
 
             self.wfile.write(json.dumps(x, ensure_ascii=False).encode('utf-8'))
+'''
+
+class CustomHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain; charset=utf-8')
+        self.end_headers()
+        self.wfile.write("Hello krampoline!".encode('utf-8'))
 
 
 PORT = 8000
