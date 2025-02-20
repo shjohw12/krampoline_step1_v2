@@ -9,7 +9,7 @@ WORKDIR /app
 COPY index.py /app/
 
 # 서버가 실행될 때 사용되는 포트
-EXPOSE 3000
+EXPOSE 8000
 
 # 컨테이너를 시작할 때 Python 스크립트를 실행
 CMD ["python", "/app/index.py"]
