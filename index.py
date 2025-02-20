@@ -82,7 +82,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             #response = {'class_id': class_id, 'message': 'class details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8')) 
             
-        elif re.match(r'^/api/applied/', self.path):
+        elif re.match('/api/applied/', self.path):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
