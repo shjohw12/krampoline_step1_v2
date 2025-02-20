@@ -15,13 +15,12 @@ def make_class_list():
     return class_list
 
 def make_category_list():
-    class_list = make_class_list()
-    category_1 = {1: class_list[0], 2: class_list[1], 3: class_list[2], 4: class_list[3], 5: class_list[4], 6: class_list[5]}
-    category_2 = {}
-    category_3 = {}
-    category_4 = {}
-    category_5 = {}
-    category_6 = {}
+    category_1 = make_class_list()
+    category_2 = []
+    category_3 = []
+    category_4 = []
+    category_5 = []
+    category_6 = []
     
     category_list = [category_1, category_2, category_3, category_4, category_5, category_6]
     
@@ -66,7 +65,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             
-            response = (make_category_list()[int(category_id)-1]).values()
+            response = make_category_list()[int(category_id)-1]
             
             #response = {'category_id': category_id, 'message': 'Category details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
