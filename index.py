@@ -20,7 +20,7 @@ def make_category_dic():
     }
     
     
-
+'''
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -29,8 +29,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
         
         for x in make_class_list():
             self.wfile.write(json.dumps(x, ensure_ascii=False).encode('utf-8'))
-
 '''
+
+
+
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/hello':
@@ -50,7 +52,6 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b'Not Found')
-'''
 
 PORT = 8000
 
