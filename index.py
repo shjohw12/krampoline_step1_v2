@@ -14,10 +14,20 @@ def make_class_list():
     
     return class_list
 
-def make_category_dic():
-    return {
-        1: make_class_list()
-    }
+def make_category_list():
+    class_list = make_class_list()
+    category_1 = class_list
+    category_2 = []
+    category_3 = []
+    category_4 = []
+    category_5 = []
+    category_6 = []
+    
+    category_list = [category_1, category_2, category_3, category_4, category_5, category_6]
+    
+    return category_list
+    
+    
     
     
 '''
@@ -41,6 +51,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             response = {'message': 'Hello, world!'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
+            
         elif re.match(r'^/api/category/\d+$', self.path):
             category_id = self.path.split('/')[-1]
             self.send_response(200)
@@ -48,18 +59,19 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             response = {'category_id': category_id, 'message': 'Category details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
+            
         elif re.match(r'^/api/class/\d+$', self.path):
             class_id = self.path.split('/')[-1]
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            
             for x in make_class_list():
                 if x["class_id"] == int(class_id):
                     response = x
                     break
             #response = {'class_id': class_id, 'message': 'class details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8')) 
+            
         else:
             self.send_response(404)
             self.end_headers()
