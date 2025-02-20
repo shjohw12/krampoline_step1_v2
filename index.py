@@ -27,7 +27,7 @@ def make_category_list():
     return category_list
 
 
-def make_applied_dict():
+def make_applied_list():
     class_list = make_class_list()
     applied_class_list = []
     for x in range(1,3):
@@ -82,11 +82,11 @@ class CustomHandler(SimpleHTTPRequestHandler):
             #response = {'class_id': class_id, 'message': 'class details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8')) 
             
-        elif re.match('/api/applied/', self.path):
+        elif re.match('/api/applied', self.path):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            response = {'message': 'applied!'}
+            response = make_applied_list()
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
         
         else:
