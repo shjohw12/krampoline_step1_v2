@@ -28,7 +28,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(x, ensure_ascii=False).encode('utf-8'))
 
 
-PORT = 3000
+PORT = 8000
 
 with HTTPServer(("", PORT), CustomHandler) as httpd:
     print(f"서버는 {PORT} 포트에서 실행 중입니다. 종료하려면 Ctrl+C를 누르세요.")
