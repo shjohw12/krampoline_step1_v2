@@ -16,16 +16,26 @@ def make_class_list():
 
 def make_category_list():
     class_list = make_class_list()
-    category_1 = class_list
-    category_2 = []
-    category_3 = []
-    category_4 = []
-    category_5 = []
-    category_6 = []
+    category_1 = {"category_id": 1}
+    for x in class_list:
+        category_1[int(x["class_id"])] = x
+    category_2 = {"category_id": 2}
+    category_3 = {"category_id": 3}
+    category_4 = {"category_id": 4}
+    category_5 = {"category_id": 5}
+    category_6 = {"category_id": 6}
     
     category_list = [category_1, category_2, category_3, category_4, category_5, category_6]
     
     return category_list
+
+
+def make_applied_dict():
+    class_list = make_class_list()
+    applied_class_dict = {}
+    for x in range(1,3):
+        applied_class_dict[x] = class_list[x-1]
+    return applied_class_dict
     
     
     
@@ -57,7 +67,11 @@ class CustomHandler(SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            response = {'category_id': category_id, 'message': 'Category details'}
+            for x in make_category_list():
+                if x["category_id"] == category_id:
+                    response = x
+                    break
+            #response = {'category_id': category_id, 'message': 'Category details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
             
         elif re.match(r'^/api/class/\d+$', self.path):
@@ -71,7 +85,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     break
             #response = {'class_id': class_id, 'message': 'class details'}
             self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8')) 
-            
+        
         else:
             self.send_response(404)
             self.end_headers()
